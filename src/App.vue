@@ -1,15 +1,22 @@
 <script setup>
-import FloatingActionButton from "./components/FAButtonContainer.vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import FAB from "./components/FAButtonContainer.vue";
+import ModalAction from "./components/ModalAction.vue";
 </script>
 
 <template>
   <div class="relative h-svh">
-    <FloatingActionButton msg="Hello msg" />
+    <section class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]">
+      <ModalAction />
+      <FAB />
+    </section>
   </div>
 </template>
 
 <style scoped>
+* {
+  caret-color: transparent;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
