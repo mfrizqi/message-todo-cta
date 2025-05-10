@@ -1,9 +1,14 @@
 <script setup>
 import TodoCard from "./todo-list/card.vue";
+
+defineProps({
+  isOpen: Boolean,
+})
+
 </script>
 
 <template lang="">
-  <section>
+  <section v-if="isOpen">
     <div
       class="bg-white min-w-[500px] max-h-[600px] min-h-[400px] rounded scroll-auto overflow-y-auto text-slate-500"
     >

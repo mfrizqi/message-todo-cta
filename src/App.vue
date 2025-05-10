@@ -1,13 +1,19 @@
 <script setup>
+import { ref } from "vue";
 import FAB from "./components/FAButtonContainer.vue";
 import ModalAction from "./components/ModalAction.vue";
+
+const openModal = () => {};
+let isOpen = ref(false)
 </script>
 
 <template>
   <div class="relative h-svh">
-    <section class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]">
-      <ModalAction />
-      <FAB />
+    <section
+      class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]"
+    >
+      <ModalAction :isOpen="isOpen" />
+      <FAB @open-modal="isOpen = true" />
     </section>
   </div>
 </template>
