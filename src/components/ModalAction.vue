@@ -3,35 +3,49 @@ import TodoCard from "./todo-list/card.vue";
 
 defineProps({
   isOpen: Boolean,
-})
-
+});
 </script>
 
-<template lang="">
-  <section v-if="isOpen">
-    <div
-      class="bg-white min-w-[500px] max-h-[600px] min-h-[400px] rounded scroll-auto overflow-y-auto text-slate-500"
-    >
+<template>
+  <Transition name="fade">
+    <section v-if="isOpen">
       <div
-        class="sticky top-0 bg-white h-full pt-4.5 pb-5 flex justify-between px-2"
+        class="bg-white min-w-[500px] max-h-[600px] min-h-[400px] rounded scroll-auto overflow-y-auto text-slate-500 mb-2"
       >
-        <div className="dropdown">
-          <div tabIndex="{0}" role="button" className="btn m-1">My tasks</div>
-          <ul
-            tabIndex="{0}"
-            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-          >
-            <li><a>Personal Errands</a></li>
-            <li><a>Urgent To-Do</a></li>
-          </ul>
+        <div
+          class="sticky top-0 bg-white h-full pt-4.5 pb-5 flex justify-between px-2"
+        >
+          <div className="dropdown">
+            <div tabIndex="{0}" role="button" className="btn m-1">My tasks</div>
+            <ul
+              tabIndex="{0}"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li><a>Personal Errands</a></li>
+              <li><a>Urgent To-Do</a></li>
+            </ul>
+          </div>
+          <button className="btn btn-primary">New Task</button>
         </div>
-        <button className="btn btn-primary">New Task</button>
+        <div class="h-[900px] pl-7">
+          <TodoCard></TodoCard>
+        </div>
       </div>
-      <div class="h-[900px] pl-7">
-        <TodoCard></TodoCard>
-      </div>
-    </div>
-  </section>
+    </section>
+  </Transition>
 </template>
 
-<style lang=""></style>
+<style scoped>
+.fade-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.fade-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

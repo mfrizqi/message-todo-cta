@@ -5,6 +5,17 @@ import ModalAction from "./components/ModalAction.vue";
 
 const openModal = () => {};
 let isOpen = ref(false)
+
+
+const modalHandler = (value)=>{
+  console.log(value)
+  if(value){
+    isOpen.value = true
+  } else {
+    isOpen.value = false
+  }
+}
+
 </script>
 
 <template>
@@ -13,7 +24,7 @@ let isOpen = ref(false)
       class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]"
     >
       <ModalAction :isOpen="isOpen" />
-      <FAB @open-modal="isOpen = true" />
+      <FAB @open-modal="modalHandler" />
     </section>
   </div>
 </template>
