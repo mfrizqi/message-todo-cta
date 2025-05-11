@@ -23,17 +23,13 @@ const modalHandler = (value)=>{
     <section
       class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]"
     >
-      <ModalAction :isOpen="isOpen" />
+      <ModalAction :isOpen="'task'" />
       <FAB @open-modal="modalHandler" />
     </section>
   </div>
 </template>
 
 <style scoped>
-* {
-  caret-color: transparent;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;

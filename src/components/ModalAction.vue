@@ -1,5 +1,4 @@
 <script setup>
-import TodoCard from "./todo-list/card.vue";
 import TodoContainer from "./todo-list/container.vue"
 
 defineProps({
@@ -11,7 +10,7 @@ defineProps({
   <Transition name="fade">
     <section v-if="isOpen">
       <div
-        class="bg-white min-w-[500px] max-h-[747px] max-w-[737px] min-h-[400px] rounded overflow-y-auto text-slate-500 mb-2"
+        class="bg-white min-w-[500px] max-h-[75vh] max-w-[737px] min-h-[400px] rounded overflow-y-auto text-slate-500 mb-2"
       >
         <TodoContainer v-if="isOpen === 'task'"/>
         <section v-if="isOpen == 'chat'">

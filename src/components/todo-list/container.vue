@@ -1,6 +1,51 @@
 <script setup>
+import { reactive, ref } from "vue";
+import TodoCard from "./card.vue";
+import { uuid } from "vue-uuid";
+import { todoItem } from "../../constants";
 
-import TodoCard from "./card.vue"
+const todo = reactive({
+  data: [
+    {
+      id: uuid.v4(),
+      title:
+        "Set up documentation report for several Cases : Case 145443, Case 192829 and Case 182203",
+      createdAt: "12/06/2021",
+      date: "12/06/2021",
+      description:
+        "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
+      checked: false,
+      isOpen: false,
+      isEdit: false
+    },
+  ],
+});
+
+const getToday = () => {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0");
+  var yyyy = today.getFullYear();
+
+  return mm + "/" + dd + "/" + yyyy;
+};
+
+const addTodo = () => {
+  const todayDate = getToday();
+  let newTodo = {}
+  Object.assign(newTodo, todoItem);
+  newTodo.id = uuid.v4();
+  newTodo.createdAt = todayDate;
+  newTodo.isEdit = true;
+  todo.data.push(newTodo);
+};
+
+const deleteTodo = (id)=>{
+  console.log(id)
+  const newTasks = todo.data.filter((todo)=> todo.id !== id)
+  
+  console.log(newTasks)
+}
 
 </script>
 
@@ -31,15 +76,26 @@ import TodoCard from "./card.vue"
           <li class="font-semibold p-0"><a>Urgent To-Do</a></li>
         </ul>
       </div>
-      <button className="btn bg-[#2F80ED] border-0 shadow-none px-4 py-3.5">
+      <button
+        @click="addTodo()"
+        className="btn bg-[#2F80ED] border-0 shadow-none px-4 py-3.5"
+      >
         New Task
       </button>
     </div>
-    <div class="min-h-[400px] pl-7 pr-2.5">
-      <TodoCard></TodoCard>
+    <div class="min-h-[400px] pl-7 pr-2.5 todos-card">
+      <TodoCard
+        v-for="todo in todo.data"
+        :key="todo.id"
+        :todo="todo"
+        @delete-todo="deleteTodo"
+      />
     </div>
   </section>
 </template>
 
-<style>
+<style scoped>
+.todos-card {
+  height: calc(100% - 4000px);
+}
 </style>

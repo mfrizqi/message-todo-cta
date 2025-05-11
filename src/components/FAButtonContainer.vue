@@ -10,8 +10,6 @@ let FABState = reactive({
 const selectFAB = (value) => {
   FABState.state = value;
   emit("open-modal", value);
-  // console.log(FABState)
-  // nextTick()
 };
 
 const setFABColor = computed(() => {
@@ -86,6 +84,10 @@ const toggleFAB = (name) => {
 </template>
 
 <style scoped>
+* {
+  caret-color: transparent;
+}
+
 .slide-fade-enter-active {
   transition: all 0.3s ease-in-out;
 }
