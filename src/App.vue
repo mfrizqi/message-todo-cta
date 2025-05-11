@@ -8,9 +8,9 @@ let isOpen = ref(false)
 
 
 const modalHandler = (value)=>{
-  console.log(value)
+  // console.log(value)
   if(value){
-    isOpen.value = true
+    isOpen.value = value
   } else {
     isOpen.value = false
   }

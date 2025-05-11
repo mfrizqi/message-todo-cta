@@ -27,18 +27,17 @@ const setFABColor = computed(() => {
 const toggleMainFAB = () => {
   if (FABState.state !== "") {
     FABState.state = "";
-    emit("open-modal", false)
+    emit("open-modal", false);
   }
   isFABOpen.value = !isFABOpen.value;
 };
 
-const toggleFAB = (name)=>{
-  if(name === FABState.state){
-    return false
+const toggleFAB = (name) => {
+  if (name === FABState.state) {
+    return false;
   }
-  return true
+  return true;
 };
-
 </script>
 
 <template lang="">
@@ -57,9 +56,7 @@ const toggleFAB = (name)=>{
       <Transition name="slide-fade">
         <div v-if="isFABOpen" class="flex gap-4">
           <div v-if="toggleFAB('task')" class="text-center cursor-pointer" @click="selectFAB('task')">
-            <!-- <Transition name="title-fade"> -->
               <div v-if="FABState.state === ''" class="mb-2 font-base">Task</div>
-            <!-- </Transition> -->
             <div
               class="rounded-full h-[60px] w-[60px] flex justify-center items-center p-[6px]"
               :class="{
@@ -71,9 +68,7 @@ const toggleFAB = (name)=>{
             </div>
           </div>
           <div v-if="toggleFAB('chat')" class="text-center cursor-pointer" @click="selectFAB('chat')">
-            <!-- <Transition name="title-fade"> -->
               <div v-if="FABState.state === ''" class="mb-2 font-base">Inbox</div>
-            <!-- </Transition> -->
             <div
               class="rounded-full h-[60px] w-[60px] flex justify-center items-center p-[6px]"
               :class="{
