@@ -23,7 +23,7 @@ const modalHandler = (value)=>{
     <section
       class="h-svh w-full flex flex-col justify-end items-end absolute right-[24px] bottom-[24px]"
     >
-      <ModalAction :isOpen="'task'" />
+      <ModalAction :isOpen="isOpen" />
       <FAB @open-modal="modalHandler" />
     </section>
   </div>
