@@ -41,10 +41,8 @@ const addTodo = () => {
 };
 
 const deleteTodo = (id)=>{
-  console.log(id)
   const newTasks = todo.data.filter((todo)=> todo.id !== id)
-  
-  console.log(newTasks)
+  todo.data = newTasks
 }
 
 </script>
