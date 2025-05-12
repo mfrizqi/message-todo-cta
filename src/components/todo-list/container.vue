@@ -18,6 +18,7 @@ const todo = reactive({
       isOpen: false,
       isEdit: false,
       remaining: 0,
+      type: 'personal'
     },
   ],
 });

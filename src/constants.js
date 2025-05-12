@@ -6,5 +6,6 @@ export const todoItem = {
     description: "",
     checked: false,
     isOpen: true,
-    isEdit: false
+    isEdit: false,
+    type: 'personal'
 }
