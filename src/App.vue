@@ -4,11 +4,10 @@ import FAB from "./components/FAButtonContainer.vue";
 import ModalAction from "./components/ModalAction.vue";
 
 const openModal = () => {};
-let isOpen = ref(false)
+let isOpen = ref('chat')
 
 
 const modalHandler = (value)=>{
-  // console.log(value)
   if(value){
     isOpen.value = value
   } else {

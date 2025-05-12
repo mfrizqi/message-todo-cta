@@ -65,15 +65,15 @@ const deleteTodo = (id) => {
             class="h-[20px] w-[20px]"
           />
         </div>
-        <ul
+        <div
           tabIndex="{0}"
-          className="dropdown-content menu rounded-box z-1 w-52 p-0 shadow-sm bg-white border border-gray-500 text-gray-600 "
+          className="dropdown-content rounded-box z-1 w-52 p-0 shadow-sm bg-white border border-gray-500 text-gray-600 "
         >
-          <li class="border-b border-gray-500 font-semibold p-0">
-            <a>Personal Errands</a>
-          </li>
-          <li class="font-semibold p-0"><a>Urgent To-Do</a></li>
-        </ul>
+          <div class="border-b border-gray-500 font-semibold px-2.5 py-1.5 cursor-pointer">
+            Personal Errands
+          </div>
+          <div class="font-semibold px-2.5 py-1.5 cursor-pointer">Urgent To-Do</div>
+        </div>
       </div>
       <button
         @click="addTodo()"

@@ -98,7 +98,8 @@ const calculateDays = (todo) => {
               invisible:
                 todo.checked || todo.createdAt === '' || todo.date === '',
               'text-[#4F4F4F]': calculateDays(todo) > 10,
-              'text-[#EB5757]': calculateDays(todo) < 10 || calculateDays(todo) === 'Overdue',
+              'text-[#EB5757]':
+                calculateDays(todo) < 10 || calculateDays(todo) === 'Overdue',
             }"
           >
             {{ calculateDays(todo) }}
@@ -122,6 +123,7 @@ const calculateDays = (todo) => {
           <div>
             <!-- Delete Todo Button -->
             <button
+            v-if="false"
               class="bg-white shadow-none border-none p-0 cursor-pointer"
               :popovertarget="`popover-${todo.id}`"
               :style="{ 'anchor-name': `--anchor-${todo.id}` }"
@@ -137,14 +139,36 @@ const calculateDays = (todo) => {
               :id="`popover-${todo.id}`"
               :style="{ 'position-anchor': `--anchor-${todo.id}` }"
             >
-              <li class="text-[#EB5757]">
+              <li class="text-[#EB5757] active:bg-white active:text-[#EB5757]">
                 <a
-                  class="active:bg-white focus:bg-white enabled:bg-white px-3 py-2"
+                  class="active:bg-white focus:bg-white px-3 py-2 active:text-[#EB5757"
                   @click="deleteTodo(todo.id)"
                   >Delete</a
                 >
               </li>
             </ul>
+
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="cursor-pointer">
+                <img
+                  src="../../assets/img/icon/more-horizontal.svg"
+                  class="h-[16px] w-[16px] shrink-0"
+                />
+              </div>
+              <div
+                tabindex="0"
+                class="dropdown-content card card-sm bg-white z-1 border border-gray-600 outline-none w-30 p-1"
+              >
+                <div class="card-body p-0 border-gray-600">
+                  <div
+                    class="active:bg-gray-100 text-[#EB5757] cursor-pointer px-3 py-2 transition-all border-gray-600"
+                    @click="deleteTodo(todo.id)"
+                  >
+                    Delete
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -202,7 +226,10 @@ const calculateDays = (todo) => {
         </div>
       </div>
       <div v-if="todo.isOpen" class="flex gap-3 text-gray-700">
-        <div class="h-[20px] w-[20px] mt-1 cursor-pointer" @click="toggleEdit(todo)">
+        <div
+          class="h-[20px] w-[20px] mt-1 cursor-pointer"
+          @click="toggleEdit(todo)"
+        >
           <img
             src="../../assets/img/icon/pen.svg"
             class="h-[15px] w-[15px] mt-1"

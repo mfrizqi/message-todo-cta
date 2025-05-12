@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex flex-col items-center">
     <span className="loading loading-spinner loading-md"></span>
     {{ title }}
   </div>
