@@ -10,13 +10,14 @@ const todo = reactive({
       id: uuid.v4(),
       title:
         "Set up documentation report for several Cases : Case 145443, Case 192829 and Case 182203",
-      createdAt: "12/06/2021",
-      date: "12/06/2021",
+      createdAt: "12/04/2025",
+      date: "12/05/2025",
       description:
         "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
       checked: false,
       isOpen: false,
-      isEdit: false
+      isEdit: false,
+      remaining: 0,
     },
   ],
 });
@@ -27,12 +28,12 @@ const getToday = () => {
   var mm = String(today.getMonth() + 1).padStart(2, "0");
   var yyyy = today.getFullYear();
 
-  return mm + "/" + dd + "/" + yyyy;
+  return dd + "/" + mm + "/" + yyyy;
 };
 
 const addTodo = () => {
   const todayDate = getToday();
-  let newTodo = {}
+  let newTodo = {};
   Object.assign(newTodo, todoItem);
   newTodo.id = uuid.v4();
   newTodo.createdAt = todayDate;
@@ -40,11 +41,10 @@ const addTodo = () => {
   todo.data.push(newTodo);
 };
 
-const deleteTodo = (id)=>{
-  const newTasks = todo.data.filter((todo)=> todo.id !== id)
-  todo.data = newTasks
-}
-
+const deleteTodo = (id) => {
+  const newTasks = todo.data.filter((todo) => todo.id !== id);
+  todo.data = newTasks;
+};
 </script>
 
 <template>
