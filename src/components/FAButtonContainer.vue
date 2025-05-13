@@ -38,8 +38,8 @@ const toggleFAB = (name) => {
 };
 </script>
 
-<template lang="">
-  <section class="relative w-full">
+<template>
+  <section class="relative w-full mt-2">
     <section class="flex flex-row-reverse gap-4" :class="{'items-end' : FABState.state === '', 'items-center' : FABState.state !== ''}">
       <div
         class="rounded-full flex justify-center items-center p-[6px] cursor-pointer h-[68px] w-[68px]"

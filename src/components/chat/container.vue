@@ -3,6 +3,7 @@ import { reactive } from "vue";
 
 import Loading from "../utils/Loading.vue";
 import ChatListCard from "./card.vue";
+import Chatroom from "./room.vue"
 import { uuid } from "vue-uuid";
 
 const chat = reactive({
@@ -46,17 +47,23 @@ const chat = reactive({
       isConvo: false,
     },
   ],
-  state: 'list'
+  state: 'list',
+  data: {}
 });
 
-const selectChatroom = (id)=>{
-  chat.state = id
+const selectChatroom = (room)=>{
+  chat.state = room.id
+  chat.data = room
+}
+
+const backChatHandler = () => {
+  chat.state = 'list'
 }
 
 </script>
 
 <template>
-  <section>
+  <section class="h-full">
     <section v-if="chat.state === 'list'">
       <div class="flex sticky top-0 bg-white z-20 pb-5.5">
         <!-- <Loading title="Loading Chats..."></Loading> -->
@@ -83,11 +90,11 @@ const selectChatroom = (id)=>{
         </div>
       </div>
       <div class="px-8">
-        <ChatListCard v-for="room in chat.room" :key="room.id" :room="room" @click="selectChatroom(room.id)" />
+        <ChatListCard v-for="room in chat.room" :key="room.id" :room="room" @click="selectChatroom(room)" />
       </div>
     </section>
-    <section v-if="chat.state !== 'list'" class="px-8 py-5">
-      Chatroom
+    <section v-if="chat.state !== 'list'" class="h-full">
+      <Chatroom @back-chat="backChatHandler()" :RoomMeta="chat.data" />
     </section>
   </section>
 </template>

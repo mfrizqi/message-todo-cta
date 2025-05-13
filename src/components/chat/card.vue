@@ -11,7 +11,7 @@ const getInitialName = (name)=>{
 
 <template>
   <section
-    class="flex gap-4 text-sm border-b border-gray-500 pb-5.5 pt-6 first:pt-0 relative cursor-pointer"
+    class="flex gap-4 text-sm border-b border-gray-500 pb-5.5 pt-6 relative cursor-pointer first:pt-0 last:border-0"
   >
     <div class="relative" v-if="room.isConvo">
       <div

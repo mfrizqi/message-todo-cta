@@ -12,7 +12,7 @@ defineProps({
   <Transition name="fade">
     <section v-if="isOpen">
       <div
-        class="bg-white min-w-[500px] max-h-[75vh] max-w-[734px] min-h-[500px] rounded overflow-y-auto text-slate-500 mb-2"
+        class="bg-white min-w-[500px] max-h-[75vh] max-w-[734px] min-h-[500px] rounded overflow-y-auto text-slate-500 h-full"
       >
         <TodoContainer v-if="isOpen === 'task'"/>
         <ChatContainer v-if="isOpen === 'chat'"/>
