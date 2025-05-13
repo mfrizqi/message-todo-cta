@@ -13,7 +13,7 @@ const getInitialName = (name)=>{
   <section
     class="flex gap-4 text-sm border-b border-gray-500 pb-5.5 pt-6 relative cursor-pointer first:pt-0 last:border-0"
   >
-    <div class="relative" v-if="room.isConvo">
+    <div class="relative" v-if="room.participants > 1">
       <div
         class="h-[34px] w-[34px] rounded-full bg-[#2F80ED] relative left-[6px] z-10 flex justify-center items-center"
       >
@@ -28,7 +28,7 @@ const getInitialName = (name)=>{
         />
       </div>
     </div>
-    <div v-if="!room.isConvo">
+    <div v-if="room.participants < 1">
       <div
         class="h-[34px] w-[34px] rounded-full bg-[#2F80ED] relative z-10 flex justify-center items-center"
       >

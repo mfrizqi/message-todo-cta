@@ -136,7 +136,6 @@ const setupColor = () => {
   });
   room.value.items = [];
   room.value.items = JSON.parse(JSON.stringify(items));
-  console.log(room.items);
 };
 
 onMounted(() => {
@@ -149,7 +148,7 @@ const sendChat = () => {
   const newMessage = {
     id: uuid.v4(),
     name: "You",
-    chat: "Morning. I’ll try to do them. Thanks",
+    text: message,
     time: "19:32",
     type: "user",
     color: "purple",
@@ -162,6 +161,11 @@ const sendChat = () => {
     container.scrollTop = container.scrollHeight;
   }, 10);
 };
+
+const deleteHandler = (id)=>{
+  room.value.items = room.value.items.filter((chat)=> chat.id !== id)
+}
+
 </script>
 
 <template>
@@ -174,7 +178,7 @@ const sendChat = () => {
       />
       <div class="grow">
         <div class="text-[#2F80ED] text-md">{{ RoomMeta.title }}</div>
-        <div class="text-xs">3 participants</div>
+        <div class="text-xs" v-if="RoomMeta.participants > 0">{{ RoomMeta.participants }} participants</div>
       </div>
       <img
         src="../../assets/img/icon/x.svg"
@@ -186,7 +190,7 @@ const sendChat = () => {
         <div v-if="chat.type === 'date'" class="flex w-full flex-col">
           <div className="divider divider-neutral">Today, June 09, 2021</div>
         </div>
-        <ChatBubble v-if="chat.type === 'user'" :chat="chat" />
+        <ChatBubble v-if="chat.type === 'user'" :chat="chat" @delete-chat="deleteHandler" />
       </template>
     </section>
     <div class="flex pb-4 px-5 gap-2">

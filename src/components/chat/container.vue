@@ -16,6 +16,7 @@ const chat = reactive({
       description: "Please check this out!",
       isNew: true,
       isConvo: true,
+      participants: 3
     },
     {
       id: uuid.v4(),
@@ -26,6 +27,7 @@ const chat = reactive({
       description: "Hey, please read.",
       isNew: false,
       isConvo: true,
+      participants: 3
     },
     {
       id: uuid.v4(),
@@ -36,6 +38,7 @@ const chat = reactive({
         "I understand your initial concerns and thats very valid, Elizabeth. But you need to look over from the company perspective",
       isNew: false,
       isConvo: true,
+      participants: 2
     },
     {
       id: uuid.v4(),
@@ -45,6 +48,7 @@ const chat = reactive({
       description: "Hey there! Welcome to your inbox.",
       isNew: false,
       isConvo: false,
+      participants: 0
     },
   ],
   state: 'list',
