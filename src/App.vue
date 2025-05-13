@@ -4,7 +4,7 @@ import FAB from "./components/FAButtonContainer.vue";
 import ModalAction from "./components/ModalAction.vue";
 
 const openModal = () => {};
-let isOpen = ref('chat')
+let isOpen = ref('')
 
 
 const modalHandler = (value)=>{

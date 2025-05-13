@@ -18,19 +18,23 @@ const setBgColor = (chat) => {
   if (chat.color === "purple") return "purple-bg";
 };
 
+const isSender = (name)=>{
+  return  name.toLowerCase() === 'you'
+}
+
 onMounted(() => {
   console.log(props);
 });
 </script>
 
 <template>
-  <div class="mb-2.5 last:mb-0">
-    <div class="mb-2" :class="setTextColor(chat)">
+  <div class="mb-2.5 last:mb-0 flex flex-col">
+    <div class="mb-2" :class="[setTextColor(chat), {'text-right': isSender(chat.name)}]">
       {{ chat.name }}
     </div>
-    <div class="flex items-start gap-2">
-      <div class="rounded w-[fit-content] p-2.5 text-[#4F4F4F]" :class="setBgColor(chat)">
-        Morning. I’ll try to do them. Thanks
+    <div class="flex items-start gap-2" :class="{'flex-row-reverse' : isSender(chat.name)}">
+      <div class="rounded w-[fit-content] max-w-md p-2.5 text-[#4F4F4F]" :class="setBgColor(chat)">
+        {{ chat.text }}
         <div>19:32</div>
       </div>
       <img
@@ -56,4 +60,12 @@ onMounted(() => {
 .orange-bg {
   background-color: #fceed3;
 }
+
+.purple-text {
+  color: #9B51E0;
+}
+.purple-bg {
+  background-color: #EEDCFF;
+}
+
 </style>
