@@ -1,68 +1,17 @@
 <script setup>
-import { defineEmits, onMounted, reactive } from "vue";
+import { defineEmits, onMounted, reactive, ref } from "vue";
 import ChatBubble from "./ChatBubble.vue";
 import { uuid } from "vue-uuid";
 
 defineProps({
   RoomMeta: {},
+  color: String,
+  bgColor: String,
 });
 
 const emit = defineEmits(["back-chat"]);
 
-const backToChatList = () => {
-  emit("back-chat");
-};
-
-const colorScheme = {
-  green: {
-    bgColor: "D2F2EA",
-    color: "43B78D",
-  },
-  orange: {
-    bgColor: "FCEED3",
-    color: "E5A443",
-  },
-};
-
-const setupColor = () => {
-  const uniqueAttributes = {};
-
-  room.items.forEach((obj) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (!uniqueAttributes[key]) {
-          uniqueAttributes[key] = [];
-        }
-        if (!uniqueAttributes[key].includes(obj[key])) {
-          uniqueAttributes[key].push(obj[key]);
-        }
-      }
-    }
-  });
-  console.log(uniqueAttributes);
-  let items =[]
-  uniqueAttributes.name.forEach((name) => {
-     items = room.items.map((item) => {
-      const chatItem = { ...item };
-      if (chatItem.name === name) {
-        chatItem.bgColor = colorScheme.green.bgColor;
-        chatItem.color = colorScheme.green.color;
-      } else {
-        chatItem.bgColor = colorScheme.orange.bgColor;
-        chatItem.color = colorScheme.orange.color;
-      }
-      return chatItem;
-    });
-  });
-  console.log(items)
-  room.items = items
-};
-
-onMounted(() => {
-  setupColor();
-});
-
-const room = reactive({
+const room = ref({
   items: [
     {
       id: uuid.v4(),
@@ -120,6 +69,49 @@ const room = reactive({
     },
   ],
 });
+
+const backToChatList = () => {
+  emit("back-chat");
+};
+
+const setupColor = () => {
+  const uniqueAttributes = {};
+
+  console.log(room)
+
+  room.value.items.forEach((obj) => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (!uniqueAttributes[key]) {
+          uniqueAttributes[key] = [];
+        }
+        if (!uniqueAttributes[key].includes(obj[key])) {
+          uniqueAttributes[key].push(obj[key]);
+        }
+      }
+    }
+  });
+  console.log(uniqueAttributes);
+  let items = [];
+  uniqueAttributes.name.forEach((name) => {
+    items = room.value.items.map((item) => {
+      const chatItem = { ...item };
+      if (chatItem.name === name) {
+        chatItem.color = 'green'
+      } else {
+        chatItem.color = 'orange'
+      }
+      return chatItem;
+    });
+  });
+  room.value.items = []
+  room.value.items = JSON.parse(JSON.stringify(items));
+  console.log(room.items)
+};
+
+onMounted(() => {
+  setupColor();
+});
 </script>
 
 <template>
@@ -144,7 +136,9 @@ const room = reactive({
         <div v-if="chat.type === 'date'" class="flex w-full flex-col">
           <div className="divider divider-neutral">Today, June 09, 2021</div>
         </div>
-        <ChatBubble :chat="chat" />
+        <ChatBubble
+          :chat="chat"
+        />
       </template>
     </div>
     <div class="flex pb-4 px-5 gap-2">
