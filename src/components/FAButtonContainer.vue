@@ -40,21 +40,43 @@ const toggleFAB = (name) => {
 
 <template>
   <section class="relative w-full mt-2">
-    <section class="flex flex-row-reverse gap-4" :class="{'items-end' : FABState.state === '', 'items-center' : FABState.state !== ''}">
+    <section
+      class="flex flex-row-reverse gap-4"
+      :class="{
+        'items-end': FABState.state === '',
+        'items-center gap-6': FABState.state !== '',
+      }"
+    >
       <div
         class="rounded-full flex justify-center items-center p-[6px] cursor-pointer h-[68px] w-[68px]"
         @click="toggleMainFAB()"
         :class="setFABColor"
-
       >
         <img v-if="FABState.state === ''" src="../assets/img/icon/storm.svg" />
-        <img v-if="FABState.state === 'task'" src="../assets/img/icon/task_active.svg" class="w-[24px] h-[24px]"/>
-        <img v-if="FABState.state === 'chat'" src="../assets/img/icon/chat_active.svg" class="w-[24px] h-[24px]"/>
+        <img
+          v-if="FABState.state === 'task'"
+          src="../assets/img/icon/task_active.svg"
+          class="w-[24px] h-[24px]"
+        />
+        <img
+          v-if="FABState.state === 'chat'"
+          src="../assets/img/icon/chat_active.svg"
+          class="w-[24px] h-[24px]"
+        />
       </div>
+      <div
+        v-if="FABState.state !== ''"
+        @click="toggleMainFAB()"
+        class="rounded-full flex justify-center items-center p-[6px] cursor-pointer h-[68px] w-[68px] bg-[#4F4F4F] absolute z-[-1] right-3"
+      ></div>
       <Transition name="slide-fade">
         <div v-if="isFABOpen" class="flex gap-4">
-          <div v-if="toggleFAB('task')" class="text-center cursor-pointer" @click="selectFAB('task')">
-              <div v-if="FABState.state === ''" class="mb-2 font-base">Task</div>
+          <div
+            v-if="toggleFAB('task')"
+            class="text-center cursor-pointer"
+            @click="selectFAB('task')"
+          >
+            <div v-if="FABState.state === ''" class="mb-2 font-base">Task</div>
             <div
               class="rounded-full h-[60px] w-[60px] flex justify-center items-center p-[6px]"
               :class="{
@@ -65,8 +87,12 @@ const toggleFAB = (name) => {
               <img src="../assets/img/icon/tasklist.svg" />
             </div>
           </div>
-          <div v-if="toggleFAB('chat')" class="text-center cursor-pointer" @click="selectFAB('chat')">
-              <div v-if="FABState.state === ''" class="mb-2 font-base">Inbox</div>
+          <div
+            v-if="toggleFAB('chat')"
+            class="text-center cursor-pointer"
+            @click="selectFAB('chat')"
+          >
+            <div v-if="FABState.state === ''" class="mb-2 font-base">Inbox</div>
             <div
               class="rounded-full h-[60px] w-[60px] flex justify-center items-center p-[6px]"
               :class="{
