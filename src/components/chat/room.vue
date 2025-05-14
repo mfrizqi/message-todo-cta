@@ -148,7 +148,7 @@ const setupParticipants = async () => {
     room.value.items = JSON.parse(JSON.stringify(items));
     setTimeout(() => {
       loadingUser.value = false;
-    }, 1000);
+    }, 500);
   }
 };
 
