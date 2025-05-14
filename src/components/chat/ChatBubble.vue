@@ -27,6 +27,9 @@ const isSender = (name) => {
 const deleteChat = (id)=>{
   emit('delete-chat', id)
 }
+const editChat = (id)=>{
+  // emit('delete-chat', id)
+}
 
 onMounted(() => {
 });
@@ -60,9 +63,16 @@ onMounted(() => {
         </div>
         <div
           tabindex="0"
-          class="dropdown-content card card-sm bg-white z-1 border border-gray-600 outline-none w-30 p-1"
+          class="dropdown-content card card-sm bg-white z-1 border border-gray-600 outline-none w-30"
         >
-          <div class="card-body p-0 border-gray-600">
+          <div class="card-body p-0 border-gray-600 gap-0">
+            <div
+              class="active:bg-gray-100 text-[#2F80ED] cursor-pointer px-3 py-2 transition-all border-gray-600 border-b"
+              @click="editChat(chat.id)"
+              v-if="chat.name.toLowerCase() === 'you'"
+            >
+              Edit
+            </div>
             <div
               class="active:bg-gray-100 text-[#EB5757] cursor-pointer px-3 py-2 transition-all border-gray-600"
               @click="deleteChat(chat.id)"
