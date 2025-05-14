@@ -13,8 +13,9 @@ defineProps({
 const emit = defineEmits(["back-chat"]);
 const message = ref("");
 const loading = ref(false);
-const loadingUser = ref(false);
+const loadingUser = ref(true);
 const users = ref([]);
+const convos = ref([]);
 
 const room = ref({
   items: [
@@ -144,18 +145,26 @@ const setupParticipants = async () => {
         return chatItem;
       });
     });
+
+    for (let i = 0; i < items.length; i++) {
+      items[i].text = convos.value[i].title;
+    }
     room.value.items = [];
     room.value.items = JSON.parse(JSON.stringify(items));
     setTimeout(() => {
       loadingUser.value = false;
     }, 500);
+
+    setTimeout(() => {
+      const container = document.getElementById("chat-area");
+      container.scrollTop = container.scrollHeight;
+    }, 500);
   }
 };
 
-onMounted(() => {
-  setupParticipants();
-  const container = document.getElementById("chat-area");
-  container.scrollTop = container.scrollHeight;
+onMounted(async () => {
+  await getConvos();
+  await setupParticipants();
 });
 
 const getUsers = async () => {
@@ -166,6 +175,20 @@ const getUsers = async () => {
         let user = res.data[Math.floor(Math.random() * res.data.length)];
         users.value.push(user);
       }
+    })
+    .catch((err) => {
+      console.error(err.message);
+    })
+    .finally(() => {
+      console.log(users);
+    });
+};
+
+const getConvos = async () => {
+  await axios
+    .get("https://jsonplaceholder.typicode.com/posts")
+    .then((res) => {
+      convos.value = res.data;
     })
     .catch((err) => {
       console.error(err.message);
